@@ -13,7 +13,7 @@ function rollPrivate() {
 	if (privateDiceContainer.childElementCount > 0) {
 		for (dice of privateDiceContainer.children) {
 			const roll = Math.floor(Math.random() * 6) + 1;
-			dice.src = "die_".concat(roll.toString(), ".png");
+			dice.children[0].src = "die_".concat(roll.toString(), ".png");
 		}
 	}
 }
@@ -22,38 +22,37 @@ function rollPublic() {
 	if (publicDiceContainer.childElementCount > 0) {
 		for (dice of publicDiceContainer.children) {
 			const roll = Math.floor(Math.random() * 6) + 1;
-			dice.src = "die_".concat(roll.toString(), ".png");
+			dice.children[0].src = "die_".concat(roll.toString(), ".png");
 		}
 	} 
 }
 
 function revealHide() {
-	const color = isHidden ? "black" : "white";
 	isHidden = !isHidden;
 	
 	for (dice of privateDiceContainer.children) {
-		dice.style.color = color;
+		console.log(dice.children[0].display)
+		dice.children[0].style.display = dice.children[0].style.display == "none" ? "flex" : "none";
+		dice.children[1].style.display = dice.children[1].style.display == "none" ? "flex" : "none";
 	}
 
 	revealHideButton.innerHTML = isHidden ? "REVEAL" : "HIDE"
-}
-
-function hide() {
-	for (dice of privateDiceContainer.children) {
-		dice.style.color = "white";
-	}
 }
 
 function moveDie(event) {
 	const die = event.currentTarget;
 	if (die.parentElement.id === "private-dice-container") {
 		die.parentElement.removeChild(die);
-		die.style.color = "black";
 		publicDiceContainer.appendChild(die);
+		die.children[0].style.display = "flex";
+		die.children[1].style.display = "none";
 	} else {
 		die.parentElement.removeChild(die);
-		die.style.color = "white";
 		privateDiceContainer.appendChild(die);
+		if (isHidden) {
+			die.children[0].style.display = "none";
+			die.children[1].style.display = "flex";
+		}
 	}
 }
 

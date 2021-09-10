@@ -2,8 +2,6 @@ body {
 	background-color: gray;
 	color: white;
 	font-family: sans-serif;
-	border-style: solid;
-	border-color: black;
 	width: 100%;
 	height: 100%;
 }
@@ -33,7 +31,6 @@ button {
 	display: flex;
 	justify-content: center;
 	margin: 5px;
-	align-items: center;
 	border-style: solid;
 	border-radius: 5px;
 	border-width: 2px;
@@ -52,4 +49,8 @@ button {
 
 #private-dice-container, #public-dice-container {
 	display: flex;
+}
+
+.public {
+	border-top: 3px solid black;
 }
