@@ -7,10 +7,13 @@ const die5 = document.getElementById("d5");
 const privateDiceContainer = document.getElementById("private-dice-container");
 const publicDiceContainer = document.getElementById("public-dice-container");
 
+let isHidden = false;
+
 function rollPrivate() {
 	if (privateDiceContainer.childElementCount > 0) {
 		for (dice of privateDiceContainer.children) {
-			dice.innerHTML = Math.floor(Math.random() * 6) + 1;
+			const roll = Math.floor(Math.random() * 6) + 1;
+			dice.src = "die_".concat(roll.toString(), ".png");
 		}
 	}
 }
@@ -18,15 +21,21 @@ function rollPrivate() {
 function rollPublic() {
 	if (publicDiceContainer.childElementCount > 0) {
 		for (dice of publicDiceContainer.children) {
-			dice.innerHTML = Math.floor(Math.random() * 6) + 1;
+			const roll = Math.floor(Math.random() * 6) + 1;
+			dice.src = "die_".concat(roll.toString(), ".png");
 		}
 	} 
 }
 
-function reveal() {
+function revealHide() {
+	const color = isHidden ? "black" : "white";
+	isHidden = !isHidden;
+	
 	for (dice of privateDiceContainer.children) {
-		dice.style.color = "black";
+		dice.style.color = color;
 	}
+
+	revealHideButton.innerHTML = isHidden ? "REVEAL" : "HIDE"
 }
 
 function hide() {
@@ -52,13 +61,11 @@ function moveDie(event) {
 const rollPrivateButton = document.getElementById("roll-private");
 const rollPublicButton = document.getElementById("roll-public");
 
-const revealButton = document.getElementById("reveal");
-const hideButton = document.getElementById("hide");
+const revealHideButton = document.getElementById("reveal-hide");
 
 rollPrivateButton.addEventListener("click", rollPrivate);
 rollPublicButton.addEventListener("click", rollPublic);
-revealButton.addEventListener("click", reveal);
-hideButton.addEventListener("click", hide);
+revealHideButton.addEventListener("click", revealHide);
 
 die1.addEventListener("click", moveDie);
 die2.addEventListener("click", moveDie);
