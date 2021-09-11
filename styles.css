@@ -26,6 +26,15 @@ button {
 	font-size: 23px;
 }
 
+button:active {
+  background-color: green;
+}
+
+button:not(:active) {
+	background: black;
+	transition: background-color 1s;
+}
+
 img {
 	max-width: 100%;
 	max-height: 100%;
@@ -47,8 +56,8 @@ img {
 	border-color: black;
 	background-color: white;
 	color: black;
-	width: 50px;
-	height: 50px;
+	width: 100px;
+	height: 100px;
 	font-size: 32px;
 }
 
@@ -58,9 +67,15 @@ img {
 }
 
 #private-dice-container, #public-dice-container {
-	display: flex;
+	display: grid;
+	grid-template-columns: 110px 110px 1fr;
 }
 
 .public {
 	border-top: 3px solid black;
+}
+
+#konami {
+	width: 100%;
+	height: 50px;
 }

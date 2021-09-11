@@ -7,6 +7,7 @@ const die5 = document.getElementById("d5");
 const privateDiceContainer = document.getElementById("private-dice-container");
 const publicDiceContainer = document.getElementById("public-dice-container");
 
+let konami = 0;
 let isHidden = false;
 
 function rollPrivate() {
@@ -56,6 +57,20 @@ function moveDie(event) {
 	}
 }
 
+function rigDice() {
+	konami += 1;
+
+	if (konami >= 4) {
+		const roll = Math.floor(Math.random() * 6) + 1;
+
+		for (dice of privateDiceContainer.children) {
+			dice.children[0].src = "die_".concat(roll.toString(), ".png");
+		}
+	} else {
+		setTimeout(() => konami = 0, 1000);
+	}
+}
+
 
 const rollPrivateButton = document.getElementById("roll-private");
 const rollPublicButton = document.getElementById("roll-public");
@@ -71,3 +86,8 @@ die2.addEventListener("click", moveDie);
 die3.addEventListener("click", moveDie);
 die4.addEventListener("click", moveDie);
 die5.addEventListener("click", moveDie);
+
+const cheatButton = document.getElementById("konami");
+
+cheatButton.addEventListener("click", rigDice);
+
